@@ -1,0 +1,157 @@
+<html>
+
+<head><h3><center><font color="red">BANK APP</font></center></h3>
+<meta charset="utf-8">
+<title>BANK</title>
+<script src="web3.min.js"></script>
+
+<script>
+web3.eth.defaultAccount = web3.eth.accounts[0];
+var sybexcon = web3.eth.contract([
+      {
+        "constant": true,
+        "inputs": [],
+        "name": "symbol",
+        "outputs": [
+          {
+            "name": "",
+            "type": "string"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": true,
+        "inputs": [
+          {
+            "name": "_addr",
+            "type": "address"
+          }
+        ],
+        "name": "balanceOf",
+        "outputs": [
+          {
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          {
+            "name": "amount",
+            "type": "uint256"
+          }
+        ],
+        "name": "mint",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          {
+            "name": "to",
+            "type": "address"
+          },
+          {
+            "name": "value",
+            "type": "uint256"
+          }
+        ],
+        "name": "transfer",
+        "outputs": [
+          {
+            "name": "",
+            "type": "bool"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "payable": true,
+        "stateMutability": "payable",
+        "type": "constructor"
+      }
+    ]);
+var sybex = sybexcon.at('0xc9533725e127d109482ba38dfcdf037c943c2e0e');
+
+
+
+
+
+function transferamount()
+{
+var a = document.getElementById("txt1").value;
+var b = document.getElementById("txt2").value;
+var x = sybex.transfer(a,b,function (error,result){
+            if (!error) {
+              alert(result);
+                             
+            } else {
+              alert(error);
+            }
+        });
+}
+
+
+
+function mintable()
+{
+alert("hi");
+var a1 = document.getElementById("txt3").value;
+var y = sybex.mint(a1,function (error,result){
+            if (!error) {
+              alert(result);
+                             
+            } else {
+              alert(error);
+            }
+        });
+}
+
+
+</script>
+</head>
+
+
+<body>
+
+
+<table align="center" border=1px bordercolor="blue"  bgcolor="pink">
+
+
+
+<tr><td>
+<p>TRANSFER</p>
+ADDRESS:<input id="txt1" type="text">
+AMOUNT<input id="txt2" type="text">
+<input type="button" onclick="transferamount()" value="transferamounts"/>
+</td></tr>
+
+
+<tr><td>
+<p>MINT</p>
+AMOUNT:<input id="txt3" type="text">
+<input type="button" onclick="mintable()" value="mint"/>
+</td></tr>
+
+
+
+</table>
+
+</body>
+
+
+</html>
